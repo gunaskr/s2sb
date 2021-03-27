@@ -1,8 +1,0 @@
-{
-  "generator-jhipster:7.0.0": {
-    "promptValues": {
-      "packageName": "s2sb.product.storyboard",
-      "nativeLanguage": "en"
-    }
-  }
-}
