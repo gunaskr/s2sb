@@ -3,10 +3,10 @@
     "skipClient": true,
     "blueprints": [],
     "applicationType": "monolith",
-    "baseName": "storyboardapi",
+    "baseName": "stoyBoardApiApp",
     "jhipsterVersion": "7.0.0",
     "skipServer": false,
-    "skipUserManagement": true,
+    "skipUserManagement": false,
     "skipCheckLengthOfIdentifier": false,
     "skipFakeData": false,
     "jhiPrefix": "jhi",
@@ -20,7 +20,7 @@
     "authenticationType": "jwt",
     "packageName": "s2sb.product.service",
     "serverPort": "8080",
-    "cacheProvider": "no",
+    "cacheProvider": "ehcache",
     "enableHibernateCache": false,
     "buildTool": "maven",
     "serverSideOptions": [],
@@ -41,6 +41,8 @@
     "withAdminUi": true,
     "databaseType": "mongodb",
     "devDatabaseType": "mongodb",
-    "prodDatabaseType": "mongodb"
+    "prodDatabaseType": "mongodb",
+    "entities": ["Asset"],
+    "lastLiquibaseTimestamp": 1617018734000
   }
 }

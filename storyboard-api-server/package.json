@@ -1,8 +1,8 @@
 {
-  "name": "storyboardapi",
+  "name": "stoy-board-api-app",
   "version": "0.0.0",
   "private": true,
-  "description": "Description for storyboardapi",
+  "description": "Description for stoyBoardApiApp",
   "license": "UNLICENSED",
   "scripts": {
     "prettier:check": "prettier --check \"{,src/**/}*.{md,json,yml,html,java}\"",

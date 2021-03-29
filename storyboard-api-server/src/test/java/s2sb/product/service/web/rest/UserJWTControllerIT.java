@@ -13,8 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import s2sb.product.service.IntegrationTest;
+import s2sb.product.service.domain.User;
+import s2sb.product.service.repository.UserRepository;
 import s2sb.product.service.web.rest.vm.LoginVM;
 
 /**
@@ -25,12 +28,26 @@ import s2sb.product.service.web.rest.vm.LoginVM;
 class UserJWTControllerIT {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private MockMvc mockMvc;
 
     @Test
     void testAuthorize() throws Exception {
+        User user = new User();
+        user.setLogin("user-jwt-controller");
+        user.setEmail("user-jwt-controller@example.com");
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode("test"));
+
+        userRepository.save(user);
+
         LoginVM login = new LoginVM();
-        login.setUsername("test");
+        login.setUsername("user-jwt-controller");
         login.setPassword("test");
         mockMvc
             .perform(post("/api/authenticate").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(login)))
@@ -43,8 +60,16 @@ class UserJWTControllerIT {
 
     @Test
     void testAuthorizeWithRememberMe() throws Exception {
+        User user = new User();
+        user.setLogin("user-jwt-controller-remember-me");
+        user.setEmail("user-jwt-controller-remember-me@example.com");
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode("test"));
+
+        userRepository.save(user);
+
         LoginVM login = new LoginVM();
-        login.setUsername("test");
+        login.setUsername("user-jwt-controller-remember-me");
         login.setPassword("test");
         login.setRememberMe(true);
         mockMvc

@@ -1,0 +1,30 @@
+{
+  "name": "Asset",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "AssetType",
+      "fieldValues": "CHARACTER,PROP,LAYOUT"
+    },
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "asset",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["stoyBoardApiApp"],
+  "changelogDate": "20210329115214"
+}
