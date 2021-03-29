@@ -14,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -125,8 +126,14 @@ class AssetResourceIT {
     	asset.setImage(imageInByte);
     	asset.setImageContentType(UPDATED_IMAGE_CONTENT_TYPE);
         // Create the Asset
-        restAssetMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(asset)))
+        byte[] convertObjectToJsonBytes = TestUtil.convertObjectToJsonBytes(asset);
+        // added it for testing through postman
+        try (FileOutputStream fos = new FileOutputStream("test")) {
+        	   fos.write(convertObjectToJsonBytes);
+        	   //fos.close(); There is no more need for this line since you had created the instance of "fos" inside the try. And this will automatically close the OutputStream
+        }
+		restAssetMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(convertObjectToJsonBytes))
             .andExpect(status().isCreated());
 
         // Validate the Asset in the database
