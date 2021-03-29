@@ -1,0 +1,23 @@
+application {
+  config {
+    packageName s2sb.product.service
+    baseName stoyBoardApiApp
+    applicationType monolith
+    databaseType mongodb
+  }
+  entities *
+}
+
+// ==============================
+// Entity definitions starts here
+// ==============================
+
+entity Asset {
+    type AssetType
+    id String
+    image AnyBlob
+}
+
+enum AssetType {
+    CHARACTER, PROP, LAYOUT
+}

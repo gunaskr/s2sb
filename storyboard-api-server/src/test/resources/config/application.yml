@@ -13,12 +13,25 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+mongock:
+  change-logs-scan-package:
+    - s2sb.product.service.config.dbmigrations
+  mongo-db:
+    read-concern: local
+    write-concern:
+      journal: false
+
 spring:
   application:
     name: storyboardapi
   jackson:
     serialization:
       write-durations-as-timestamps: false
+  data:
+    mongodb:
+      host: localhost
+      port: 0
+      database: storyboardapi
   mail:
     host: localhost
   main:

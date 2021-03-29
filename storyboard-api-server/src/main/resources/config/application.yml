@@ -64,6 +64,10 @@ management:
           autotime:
             enabled: true
 
+mongock:
+  change-logs-scan-package:
+    - s2sb.product.service.config.dbmigrations
+
 spring:
   application:
     name: storyboardapi
