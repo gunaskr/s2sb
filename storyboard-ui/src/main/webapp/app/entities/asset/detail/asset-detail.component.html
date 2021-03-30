@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="asset">
+      <h2 data-cy="assetDetailsHeading"><span jhiTranslate="storyboardapiApp.asset.detail.title">Asset</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="storyboardapiApp.asset.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'storyboardapiApp.AssetType.' + asset.type }}">{{ asset.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="storyboardapiApp.asset.id">Id</span></dt>
+        <dd>
+          <span>{{ asset.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="storyboardapiApp.asset.image">Image</span></dt>
+        <dd>
+          <div *ngIf="asset.image">
+            <a (click)="openFile(asset.image, asset.imageContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ asset.imageContentType }}, {{ byteSize(asset.image) }}
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/asset', asset.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "storyboardapiApp": {
+    "AssetType": {
+      "null": "",
+      "CHARACTER": "CHARACTER",
+      "PROP": "PROP",
+      "LAYOUT": "LAYOUT"
+    }
+  }
+}

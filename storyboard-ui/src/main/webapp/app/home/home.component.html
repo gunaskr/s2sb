@@ -1,1 +1,7 @@
-<canvas id="canvas" #htmlCanvas></canvas>
+<div class="row">
+  <div class="col-md-9">
+    <div [ngSwitch]="isAuthenticated()">
+      <canvas id="canvas" #htmlCanvas></canvas>
+    </div>
+  </div>
+</div>

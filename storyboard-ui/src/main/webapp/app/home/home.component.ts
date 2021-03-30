@@ -5,6 +5,10 @@ import { Subscription } from 'rxjs';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { fabric } from 'fabric';
+import { AssetService, EntityResponseType } from 'app/entities/asset/service/asset.service';
+import { HttpResponse } from '@angular/common/http';
+import { IAsset } from 'app/entities/asset/asset.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-home',
@@ -14,6 +18,7 @@ import { fabric } from 'fabric';
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   account: Account | null = null;
   authSubscription?: Subscription;
+  imageUrl: string | null | undefined;
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
   public size: any = {
     width: 800,
@@ -21,7 +26,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
   private canvas: fabric.Canvas;
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private assetService: AssetService,
+    private readonly sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
@@ -50,10 +60,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
-    fabric.Image.fromURL('../../content/images/jhipster_family_member_0_head-192.png', aImg => {
-      // Scale down our image size
-      // aImg.scale(0.5);
-      this.canvas.add(aImg);
+    this.assetService.find('6061e0d262d76d5134115ba0').subscribe((response: HttpResponse<IAsset>) => {
+      this.imageUrl = `data:${(response.body as IAsset).imageContentType as string};base64,${(response.body as IAsset).image as string}`;
+      fabric.Image.fromURL(this.imageUrl, img => {
+        this.canvas.add(img);
+      });
     });
   }
 }

@@ -20,7 +20,7 @@ module.exports = (config, options) => {
       }),
       new FriendlyErrorsWebpackPlugin(),
       new WebpackNotifierPlugin({
-        title: 'Storyboardui',
+        title: 'Storyboardapi',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
       }),
       new BrowserSyncPlugin(
