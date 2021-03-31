@@ -3,5 +3,10 @@
     <div [ngSwitch]="isAuthenticated()">
       <canvas id="canvas" #htmlCanvas></canvas>
     </div>
+    <div class="row">
+      <button (click)="saveCanvasToJSON()">Save</button>
+      <button (click)="confirmClear()">Clear</button>
+      <button (click)="loadCanvasFromJSON()">Reload</button>
+    </div>
   </div>
 </div>
