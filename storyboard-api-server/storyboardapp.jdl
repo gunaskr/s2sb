@@ -21,3 +21,48 @@ entity Asset {
 enum AssetType {
     CHARACTER, PROP, LAYOUT
 }
+
+entity AssetPlacement {
+	angle Integer
+	backgroundColor String
+	cropX Integer
+	cropY Integer
+	crossOrigin String
+	fill String
+	fillRule String
+	flipX Boolean
+	flipY Boolean
+	globalCompositeOperation String
+	height Integer
+	left Integer
+	opacity Integer
+	originX Integer
+	originY Integer
+	paintFirst Integer
+	scaleX Integer
+	scaleY Integer
+	shadow String
+	skewX String
+	skewY String
+	stroke String
+	strokeDashArray String
+	strokeLineCap String
+	strokeLineJoin String
+	strokeMiterLimit Integer
+	strokeUniform Boolean
+	strokeWidth Integer
+	top Integer
+	version String
+	visible Boolean
+	width Integer
+}
+
+entity Canvas {
+	id String
+	version String
+	objects AssetPlacement
+}
+
+relationship OneToMany {
+	Canvas to AssetPlacement
+}

@@ -60,17 +60,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
-    this.loadCanvasFromJSON();
-    /*this.assetService.query().subscribe((response: HttpResponse<IAsset[]>) => {
+    // this.loadCanvasFromJSON();
+    this.assetService.query().subscribe((response: HttpResponse<IAsset[]>) => {
       const assets: IAsset[] = response.body as IAsset[];
       assets.forEach(asset => {
         const imageUrl = `data:${asset.imageContentType as string};base64,${asset.image as string}`;
         fabric.Image.fromURL(imageUrl, img => {
-          //this.canvas.add(img);
+          this.canvas.add(img);
         });
-      })
-      
-    });*/
+      });
+    });
     /*this.assetService.find('6061e0d262d76d5134115ba0').subscribe((response: HttpResponse<IAsset>) => {
       this.imageUrl = `data:${(response.body as IAsset).imageContentType as string};base64,${(response.body as IAsset).image as string}`;
       fabric.Image.fromURL(this.imageUrl, img => {
@@ -81,8 +80,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   saveCanvasToJSON(): void {
-    const json = JSON.stringify(this.canvas);
-    localStorage.setItem('Kanvas', json);
+    const json = this.canvas.toDatalessJSON();
+    localStorage.setItem('Kanvas', JSON.stringify(json));
   }
 
   loadCanvasFromJSON(): void {
